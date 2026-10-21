@@ -12,8 +12,8 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap&subset=cyrillic" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=8">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -56,20 +56,26 @@
 
 <main>
   <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="mosaic">
-        <div class="tile t-a"><img src="assets/img/selfie.jpg" alt="Молодые люди со смартфонами"></div>
-        <div class="tile t-b"><img src="assets/img/led-mall.jpg" alt="LED-экран Cannect AI в торговом центре"></div>
-        <div class="tile t-c"><img src="assets/img/girl.jpg" alt="Девушка со смартфоном"></div>
-        <div class="tile t-d"><img src="assets/img/tv-studio.jpg" alt="Телестудия"></div>
-        <div class="tile t-e"><img src="assets/img/office.jpg" alt="Команда разработки в офисе"></div>
-        <div class="tile t-f"><img src="assets/img/friends.jpg" alt="Друзья в национальных костюмах"></div>
-        <div class="tile t-g"><img src="assets/img/production.jpg" alt="Съёмка интервью"></div>
-        <div class="mosaic__shade"></div>
-        <div class="mosaic__tag">Алматы, Казахстан</div>
-        <div class="mosaic__words" aria-hidden="true"><span>Galamat</span><span class="line"></span><span>Holding</span></div>
+  <section class="hero hero--ring">
+    <div class="wrap hero__head">
+      <p class="hero__label">( Galamat ® ) · Алматы, Казахстан</p>
+      <h1 class="hero__title" lang="en">People <em class="accent">talk</em>,<br>we <em class="accent">echo</em> it</h1>
+    </div>
+    <div class="ring-stage" aria-label="Продукты и направления Galamat — карусель, можно крутить мышью или пальцем">
+      <div class="ring">
+        <a class="ring-card" href="#tech-products"><img src="assets/img/selfie.jpg" alt="" draggable="false"><b>REDart</b><span>Камера · iOS, Android</span></a>
+        <a class="ring-card" href="#media-network"><img src="assets/img/girl.jpg" alt="" draggable="false"><b>bee16</b><span>Медиасеть · 60 аккаунтов</span></a>
+        <a class="ring-card" href="#tech-clients"><img src="assets/img/tv-studio.jpg" alt="" draggable="false"><b>Qazaqstan TV</b><span>Клиентский проект</span></a>
+        <a class="ring-card ring-card--blue" href="#tech-products"><svg class="ring-card__wave" viewBox="0 0 120 40" aria-hidden="true"><g fill="currentColor"><rect x="2" y="16" width="6" height="8" rx="3"/><rect x="14" y="10" width="6" height="20" rx="3"/><rect x="26" y="4" width="6" height="32" rx="3"/><rect x="38" y="12" width="6" height="16" rx="3"/><rect x="50" y="0" width="6" height="40" rx="3"/><rect x="62" y="8" width="6" height="24" rx="3"/><rect x="74" y="14" width="6" height="12" rx="3"/><rect x="86" y="6" width="6" height="28" rx="3"/><rect x="98" y="12" width="6" height="16" rx="3"/><rect x="110" y="17" width="6" height="6" rx="3"/></g></svg><b>Dauys AI</b><span>AI для казахского языка</span></a>
+        <a class="ring-card" href="#media-services"><img src="assets/img/led-mall.jpg" alt="" draggable="false"><b>Cannect AI</b><span>LED-экраны в ТРЦ</span></a>
+        <a class="ring-card" href="#media-services"><img src="assets/img/baipket.jpg" alt="" draggable="false"><b>Baipket</b><span>Школа маркетинга</span></a>
+        <a class="ring-card ring-card--ink" href="#tech-products"><b>Qurany</b><span>604 страницы офлайн</span></a>
+        <a class="ring-card" href="#tech"><img src="assets/img/office.jpg" alt="" draggable="false"><b>Galamat Tech</b><span>Разработка под ключ</span></a>
+        <a class="ring-card" href="#media-services"><img src="assets/img/production.jpg" alt="" draggable="false"><b>Продакшн</b><span>Видео для брендов</span></a>
+        <a class="ring-card" href="#tech-products"><img src="assets/img/friends.jpg" alt="" draggable="false"><b>iTalent</b><span>Тест талантов</span></a>
       </div>
+    </div>
+    <div class="wrap">
       <div class="key-stats" aria-label="Galamat в цифрах">
         <div><b>36M</b><span>подписчиков в медиасети bee16</span></div>
         <div><b>860M</b><span>просмотров в месяц</span></div>
@@ -83,7 +89,7 @@
   <section class="intro">
     <div class="wrap">
       <p class="intro__label">( Galamat ® )</p>
-      <h1 class="intro__text">Galamat — технологический и медиа-холдинг из Казахстана. Создаём цифровые продукты и медиа, которыми каждый день пользуются миллионы людей.</h1>
+      <p class="intro__text">Galamat — технологический и медиа-холдинг из Казахстана. Две части, Galamat Tech и Galamat Media, работают как одна команда: от приложения до рекламной кампании.</p>
       <div class="intro__buttons">
         <a class="btn btn--dark" href="#contacts"><span class="dot"></span>Обсудить проект</a>
         <a class="btn btn--ghost" href="mailto:mirzassalim@quranyy.com?subject=%D0%9F%D1%80%D0%B5%D0%B7%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F%20Galamat">Запросить презентацию</a>
@@ -512,6 +518,6 @@
   </div>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=8"></script>
 </body>
 </html>
