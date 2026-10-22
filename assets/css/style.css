@@ -766,3 +766,39 @@ html.lenis, html.lenis body { height: auto; }
 .hero__title--echo { padding-bottom: .5em; }
 .echo-done .echo-svg .echo-g { animation: none; }
 .hero__title--echo .echo-word { margin-top: -0.3em; }
+
+/* hero stats: larger, tucked right under the centre cards of the ring */
+.key-stats--v3 { grid-template-columns: repeat(2, minmax(0, 360px)); gap: 56px 40px; margin-top: calc(var(--ring-ch, 420px) * -0.3); }
+.key-stats--v3 b { font-size: clamp(52px, 6.7vw, 96px); letter-spacing: -0.05em; }
+.key-stats--v3 span { margin-top: 10px; font-size: clamp(16px, 1.7vw, 24px); }
+@media (max-width: 760px) {
+  .key-stats--v3 { gap: 32px 16px; margin-top: calc(var(--ring-ch, 180px) * -0.18); }
+}
+.key-stats--v3 { margin-top: calc(var(--ring-ch, 420px) * -0.42); }
+@media (max-width: 760px) { .key-stats--v3 { margin-top: calc(var(--ring-ch, 180px) * -0.22); } }
+.hero--ring .key-stats--v3 { margin-top: calc(var(--ring-ch, 420px) * -0.2); }
+@media (max-width: 760px) { .hero--ring .key-stats--v3 { margin-top: calc(var(--ring-ch, 180px) * -0.22); } }
+
+/* QA fixes */
+.tech-v3 { padding: 140px 0 150px; }
+.tech-v3__mark { top: 34%; }
+#tech-dev .chips { gap: 6px; flex-wrap: nowrap; }
+#tech-dev .chip { font-size: 17px; padding: 7px 12px; white-space: nowrap; }
+@media (max-width: 1180px) { #tech-dev .chips { flex-wrap: wrap; } }
+#partners .sec-head .lead { max-width: none; white-space: nowrap; }
+@media (max-width: 960px) { #partners .sec-head .lead { white-space: normal; } }
+
+/* Galamat Media opener — same build as Galamat Tech, on brand blue */
+.tech-v3--media { background: var(--blue); }
+.tech-v3--media .tech-v3__mark { opacity: .05; }
+.tech-v3--media .tech-v3__stats span { color: rgba(255,255,255,.78); }
+/* bee16 network on light background */
+.network-v3 .network__left h2 { margin: 0 0 28px; color: var(--ink); }
+.network-v3 .network__left p { color: var(--grey); font-size: 18px; }
+.network-v3 .network__left { justify-content: center; }
+.network-v3 .network__photo { min-height: 560px; }
+.network-v3 .accounts-head { margin-top: 96px; }
+.network-v3 .accounts-head h3 { color: var(--ink); }
+.network-v3 .accounts-head span { color: var(--grey); }
+.network-v3 .account { background: var(--white); color: var(--ink); }
+.network-v3 .account b { color: var(--ink); }

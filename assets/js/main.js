@@ -63,6 +63,7 @@
     var ch = Math.round(cw * 1.25);
     ring.style.width = cw + 'px';
     ring.style.height = ch + 'px';
+    stage.parentElement.style.setProperty('--ring-ch', ch + 'px');
     stage.style.height = Math.round(ch * 1.3) + 'px';
     stage.style.perspective = Math.round(r * 1.4) + 'px';
     cards.forEach(function (c, i) { c.style.transform = 'rotateY(' + (i * step) + 'deg) translateZ(' + (-r) + 'px)'; });
