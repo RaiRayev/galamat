@@ -120,18 +120,61 @@
   requestAnimationFrame(frame);
 })();
 
-// Hero slogan: replay the echo when the pointer comes over it
+// Hero slogan "echo": the word is redrawn as SVG so the outline can be a true
+// 2px OUTSIDE stroke (4px stroke, inner half masked away by the glyph shape).
 (function () {
   var word = document.querySelector('.echo-word');
-  if (!word || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var busy = false;
-  word.addEventListener('pointerenter', function () {
-    if (busy) return;
-    busy = true;
-    var layers = word.querySelectorAll('.echo-l');
-    layers.forEach(function (l) { l.style.animation = 'none'; });
-    void word.offsetWidth; // restart the CSS animation
-    layers.forEach(function (l) { l.style.animation = ''; });
-    setTimeout(function () { busy = false; }, 1600);
+  if (!word) return;
+  var base = word.querySelector('.echo-base');
+  var text = base.textContent.trim();
+  var NS = 'http://www.w3.org/2000/svg';
+  // scale, colour — taken from the Figma blend (Slide 16:9 - 39)
+  var layers = [
+    [1.052, 'rgba(4,240,251,.15)'], [1.105, 'rgba(9,225,252,.25)'], [1.158, 'rgba(13,210,252,.35)'],
+    [1.211, 'rgba(18,195,253,.45)'], [1.264, 'rgba(22,180,253,.54)'], [1.316, 'rgba(27,164,254,.64)'],
+    [1.369, 'rgba(0,153,255,.74)']
+  ];
+  var OUTLINE_SCALE = 1.422, STROKE = 2;
+  var marker = document.createElement('i');
+  marker.className = 'echo-bl';
+  base.appendChild(marker);
+
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  function build() {
+    var old = word.querySelector('.echo-svg');
+    if (old) old.remove();
+    var r = base.getBoundingClientRect();
+    var w = r.width, h = r.height;
+    var y = marker.getBoundingClientRect().top - r.top; // text baseline
+    var origin = (w / 2) + 'px ' + (h * 0.56) + 'px';
+    var t = '<text x="0" y="' + y + '">' + esc(text) + '</text>';
+    var html = '<defs><mask id="echo-outside" maskUnits="userSpaceOnUse" x="' + (-w) + '" y="' + (-h) + '" width="' + (3 * w) + '" height="' + (3 * h) + '">' +
+      '<rect x="' + (-w) + '" y="' + (-h) + '" width="' + (3 * w) + '" height="' + (3 * h) + '" fill="#fff"/>' +
+      '<text x="0" y="' + y + '" fill="#000">' + esc(text) + '</text></mask></defs>';
+    layers.forEach(function (l, i) {
+      html += '<g class="echo-g' + (i === layers.length - 1 ? ' echo-g--crisp' : '') + '" style="--s:' + l[0] + ';--i:' + i + ';transform-origin:' + origin + '" fill="' + l[1] + '">' + t + '</g>';
+    });
+    html += '<g class="echo-g echo-g--crisp" style="--s:' + OUTLINE_SCALE + ';--i:' + layers.length + ';transform-origin:' + origin + '">' +
+      '<text x="0" y="' + y + '" fill="none" stroke="#0066ff" stroke-width="' + (STROKE * 2) + '" vector-effect="non-scaling-stroke" stroke-linejoin="round" mask="url(#echo-outside)">' + esc(text) + '</text></g>';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('class', 'echo-svg');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    svg.innerHTML = html;
+    word.appendChild(svg);
+    word.classList.add('is-svg');
+  }
+
+  var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+  ready.then(function () {
+    build();
+    // play the echo once, then keep it still (also on later resizes)
+    setTimeout(function () { word.classList.add('echo-done'); }, 2400);
+    var timer;
+    window.addEventListener('resize', function () {
+      clearTimeout(timer);
+      timer = setTimeout(function () { word.classList.add('echo-done'); build(); }, 150);
+    });
   });
 })();

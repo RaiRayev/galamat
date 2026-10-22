@@ -611,3 +611,18 @@ section[id] { scroll-margin-top: 72px; }
 .hero--ring .ring-stage { margin-top: 0; }
 .echo-l { filter: blur(.006em); }
 .echo-l[style*="--i:6"], .echo-l--outline { filter: none; }
+
+/* Echo slogan drawn in SVG (see main.js) */
+.echo-base { color: #0077ff; }                 /* no-JS fallback */
+.echo-word.is-svg .echo-base { color: transparent; }
+.echo-bl { display: inline-block; width: 0; height: 0; vertical-align: baseline; }
+.echo-svg { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; font: inherit; letter-spacing: inherit; }
+.echo-svg text { font: inherit; letter-spacing: inherit; }
+.echo-g {
+  transform-box: view-box; transform: scale(var(--s)); filter: blur(.006em);
+  animation: echo-spread 1.5s cubic-bezier(.2, .75, .2, 1) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+.echo-g--crisp { filter: none; }
+.echo-done .echo-g { animation: none; }
+@media (prefers-reduced-motion: reduce) { .echo-g { animation: none; } }
