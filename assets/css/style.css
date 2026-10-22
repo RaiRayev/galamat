@@ -580,3 +580,6 @@ section[id] { scroll-margin-top: 72px; }
 .hero__title { margin-top: 16px; font-size: clamp(44px, 6.4vw, 96px); }
 .ring-stage { margin-top: -1vw; }
 @media (max-width: 600px) { .ring-stage { margin-top: 16px; } }
+
+/* Russian slogan: Cyrillic italic serif accent */
+.hero__title .accent { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 1.16em; letter-spacing: -0.025em; }
