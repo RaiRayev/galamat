@@ -629,3 +629,9 @@ section[id] { scroll-margin-top: 72px; }
 
 /* Echo fills more transparent; the outline is stroke-only, so it is unaffected */
 .echo-svg .echo-g { fill-opacity: .55; }
+
+/* ---------- Smooth scroll (Lenis) ---------- */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }

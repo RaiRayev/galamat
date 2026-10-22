@@ -178,3 +178,24 @@
     });
   });
 })();
+
+// Smooth, inertial page scrolling (Lenis). Touch keeps native scrolling.
+(function () {
+  if (!window.Lenis || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true });
+  function raf(t) { lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  // in-page links glide to their section, below the sticky header
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!a || e.defaultPrevented) return;
+    var url = new URL(a.getAttribute('href'), location.href);
+    if (url.pathname !== location.pathname || !url.hash) return;
+    var target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+    if (!target) return;
+    e.preventDefault();
+    lenis.scrollTo(target, { offset: -72, duration: 1.4 });
+    history.pushState(null, '', url.hash);
+  });
+  window.galamatLenis = lenis;
+})();
