@@ -756,3 +756,13 @@ html.lenis, html.lenis body { height: auto; }
   .tech-v3__stats b { font-size: 34px; white-space: nowrap; }
   .tech-v3__stats span { font-size: 14px; }
 }
+
+/* Echo slogan v3 (Figma Page 4): copies drop toward the front copy, no outline */
+.echo-svg .echo-g { filter: none; transform: translateY(var(--dy, 0)) scale(var(--s)); animation-name: echo-drop; }
+@keyframes echo-drop {
+  from { transform: translateY(0) scale(1); opacity: 0; }
+  to { transform: translateY(var(--dy, 0)) scale(var(--s)); opacity: 1; }
+}
+.hero__title--echo { padding-bottom: .5em; }
+.echo-done .echo-svg .echo-g { animation: none; }
+.hero__title--echo .echo-word { margin-top: -0.3em; }

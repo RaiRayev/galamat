@@ -120,21 +120,27 @@
   requestAnimationFrame(frame);
 })();
 
-// Hero slogan "echo": the word is redrawn as SVG so the outline can be a true
-// 2px OUTSIDE stroke (4px stroke, inner half masked away by the glyph shape).
+// Hero slogan "echo" (Figma Page 4): nine copies of the word, from the plain
+// word up top to a 1.42× copy below it; each filled with its own gradient.
 (function () {
   var word = document.querySelector('.echo-word');
   if (!word) return;
   var base = word.querySelector('.echo-base');
   var text = base.textContent.trim();
   var NS = 'http://www.w3.org/2000/svg';
-  // scale, colour — taken from the Figma blend (Slide 16:9 - 39)
+  // [scale, end colour, end alpha, layer opacity] — straight from the Figma blend
   var layers = [
-    [1.052, 'rgba(4,240,251,.15)'], [1.105, 'rgba(9,225,252,.25)'], [1.158, 'rgba(13,210,252,.35)'],
-    [1.211, 'rgba(18,195,253,.45)'], [1.264, 'rgba(22,180,253,.54)'], [1.316, 'rgba(27,164,254,.64)'],
-    [1.369, 'rgba(0,153,255,.74)']
+    [1.000, '#0077ff', 0.00, 0.050],
+    [1.053, '#2088ff', 0.13, 0.124],
+    [1.106, '#4099ff', 0.25, 0.198],
+    [1.159, '#60aaff', 0.38, 0.271],
+    [1.211, '#80bbff', 0.50, 0.345],
+    [1.264, '#9fccff', 0.63, 0.419],
+    [1.317, '#bfddff', 0.75, 0.493],
+    [1.370, '#dfeeff', 0.88, 0.566]
   ];
-  var OUTLINE_SCALE = 1.422, STROKE = 2;
+  var TOP = 1.4228;   // the front copy
+  var DROP = 0.339;   // em the front copy sits lower than the plain word
   var marker = document.createElement('i');
   marker.className = 'echo-bl';
   base.appendChild(marker);
@@ -145,17 +151,22 @@
     if (old) old.remove();
     var r = base.getBoundingClientRect();
     var w = r.width, h = r.height;
-    var y = marker.getBoundingClientRect().top - r.top; // text baseline
-    var origin = (w / 2) + 'px ' + (h * 0.56) + 'px';
+    var y = marker.getBoundingClientRect().top - r.top;
+    var origin = (w / 2) + 'px ' + (h * 0.5) + 'px';
     var t = '<text x="0" y="' + y + '">' + esc(text) + '</text>';
-    var html = '<defs><mask id="echo-outside" maskUnits="userSpaceOnUse" x="' + (-w) + '" y="' + (-h) + '" width="' + (3 * w) + '" height="' + (3 * h) + '">' +
-      '<rect x="' + (-w) + '" y="' + (-h) + '" width="' + (3 * w) + '" height="' + (3 * h) + '" fill="#fff"/>' +
-      '<text x="0" y="' + y + '" fill="#000">' + esc(text) + '</text></mask></defs>';
+    var defs = '<defs>';
     layers.forEach(function (l, i) {
-      html += '<g class="echo-g' + (i === layers.length - 1 ? ' echo-g--crisp' : '') + '" style="--s:' + l[0] + ';--i:' + i + ';transform-origin:' + origin + '" fill="' + l[1] + '">' + t + '</g>';
+      defs += '<linearGradient id="eg' + i + '" x1="0" y1="-0.545" x2="0" y2="1.05">' +
+        '<stop offset="0" stop-color="#0077ff"/><stop offset="1" stop-color="' + l[1] + '" stop-opacity="' + l[2] + '"/></linearGradient>';
     });
-    html += '<g class="echo-g echo-g--crisp" style="--s:' + OUTLINE_SCALE + ';--i:' + layers.length + ';transform-origin:' + origin + '">' +
-      '<text x="0" y="' + y + '" fill="none" stroke="#0066ff" stroke-width="' + (STROKE * 2) + '" vector-effect="non-scaling-stroke" stroke-linejoin="round" mask="url(#echo-outside)">' + esc(text) + '</text></g>';
+    defs += '<linearGradient id="egTop" x1="0" y1="0" x2="1.8" y2="1.2"><stop offset="0" stop-color="#0077ff"/><stop offset="1" stop-color="#ffffff"/></linearGradient></defs>';
+    var html = defs;
+    function g(cls, i, s, fill, op) {
+      var k = (s - 1) / (TOP - 1);
+      return '<g class="echo-g ' + cls + '" style="--s:' + s + ';--dy:' + (k * DROP).toFixed(4) + 'em;--i:' + i + ';transform-origin:' + origin + ';fill-opacity:' + op + '" fill="' + fill + '">' + t + '</g>';
+    }
+    layers.forEach(function (l, i) { html += g('', i, l[0], 'url(#eg' + i + ')', l[3]); });
+    html += g('echo-g--front', layers.length, TOP, 'url(#egTop)', 1);
     var svg = document.createElementNS(NS, 'svg');
     svg.setAttribute('class', 'echo-svg');
     svg.setAttribute('aria-hidden', 'true');
@@ -169,7 +180,6 @@
   var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
   ready.then(function () {
     build();
-    // play the echo once, then keep it still (also on later resizes)
     setTimeout(function () { word.classList.add('echo-done'); }, 2400);
     var timer;
     window.addEventListener('resize', function () {
