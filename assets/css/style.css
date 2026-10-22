@@ -635,3 +635,124 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
+
+/* =================== v3 — redesign from Figma (Page 4) =================== */
+/* hero stats: 2×2, centred, blue */
+.key-stats--v3 { display: grid; grid-template-columns: repeat(2, minmax(0, 255px)); justify-content: center; gap: 47px 20px; border: 0; margin-top: -2.8vw; position: relative; z-index: 2; text-align: center; }
+.key-stats--v3 div { border: 0 !important; padding: 0 !important; align-items: center; }
+.key-stats--v3 b { font-size: clamp(44px, 4.45vw, 64px); font-weight: 700; color: var(--blue); letter-spacing: -0.045em; }
+.key-stats--v3 span { margin-top: 6px; font-size: clamp(15px, 1.4vw, 20px); font-weight: 600; color: #6e6e73; letter-spacing: -0.02em; line-height: 1.21; }
+.key-stats--v3 strong { font-weight: 700; color: #484848; }
+
+/* statement */
+.intro--v3 { padding: 120px 0 115px; text-align: center; }
+.intro--v3 .intro__text { max-width: 1110px; margin: 0 auto; font-size: clamp(26px, 3.33vw, 48px); font-weight: 600; color: #171717; letter-spacing: -0.025em; line-height: 1.18; }
+
+/* blur → sharp reveal while scrolling (words wrapped by main.js) */
+.blur-reveal .w { display: inline-block; will-change: filter, opacity; }
+.blur-reveal--grad { background: var(--g); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.blur-reveal--grad.is-split { background: none; }
+.blur-reveal--grad.is-split .w { color: transparent; background-image: var(--g); background-repeat: no-repeat; -webkit-background-clip: text; background-clip: text; }
+
+/* overview */
+.about-v3 { padding: 67px 0; }
+.mission-title { text-align: center; margin-bottom: 61px; font-size: clamp(34px, 3.9vw, 56px); font-weight: 600; letter-spacing: -0.045em; line-height: 1.05; color: #171717; }
+.mission-title strong, .h-v3 strong { font-weight: 700; }
+.about-v3 .part-card { gap: 24px; padding: 16px; }
+.about-v3 .part-card__body { padding: 0; gap: 16px; }
+.part-card__name { padding: 4px 12px 0; font-size: clamp(32px, 3vw, 44px); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: #fff; }
+.about-v3 .toc a { padding: 18px 12px; font-size: clamp(17px, 1.4vw, 20px); font-weight: 600; }
+.about-v3 .toc li:last-child { border-bottom: 0; }
+
+/* Galamat Tech opener */
+.tech-v3 { position: relative; overflow: hidden; background: #171717; color: #fff; text-align: center; padding: 61px 0; }
+.tech-v3__mark { position: absolute; left: 50%; top: 40%; width: min(898px, 70vw); height: auto; transform: translateX(-50%); fill: #fff; opacity: .02; pointer-events: none; }
+.tech-v3 .wrap { position: relative; }
+.tech-v3__title { font-size: clamp(64px, 12.8vw, 184px); font-weight: 600; letter-spacing: -0.06em; line-height: .92; }
+.tech-v3__title strong { font-weight: 700; }
+.tech-v3__desc { max-width: 749px; margin: 30px auto 0; font-size: clamp(19px, 1.8vw, 26px); font-weight: 600; letter-spacing: -0.015em; line-height: 1.35; }
+.tech-v3__stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 52px 16px; margin-top: 64px; }
+.tech-v3__stats div { display: flex; flex-direction: column; align-items: center; }
+.tech-v3__stats b { font-size: clamp(40px, 4.45vw, 64px); font-weight: 600; letter-spacing: -0.045em; line-height: 1; }
+.tech-v3__stats span { margin-top: 10px; max-width: 230px; font-size: 16px; font-weight: 600; color: #9e9ea8; line-height: 1.4; }
+
+/* products / development */
+.h-v3 { font-size: clamp(40px, 4.45vw, 64px); font-weight: 600; letter-spacing: -0.04em; line-height: 1; }
+.products-v3 .product h3 { margin: 0 0 20px; font-weight: 700; }
+.products-v3 .product p { font-weight: 600; }
+.lead--strong { font-size: 20px; font-weight: 600; max-width: 380px; }
+#tech-dev .inline-row > span { font-size: 20px; font-weight: 700; color: #000; }
+#tech-dev .chip { font-size: 19px; font-weight: 600; }
+#partners .lead { color: #000; }
+
+/* Сделано в Казахстане — three scroll states over the eagle hunter */
+.kz-v3 { position: relative; height: 320vh; background: #171717; }
+.kz-v3__stage { position: sticky; top: 0; height: 100vh; overflow: hidden; color: #fff; }
+.kz-v3__bg, .kz-v3__cut { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+.kz-v3__bg { z-index: 0; }
+.kz-v3__shade { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,0) 30%, rgba(0,0,0,0) 62%, rgba(0,0,0,.35)); }
+.kz-v3__shade::after { content: ""; position: absolute; inset: 0; background: rgba(10,10,12,.42); opacity: var(--dim, 0); }
+.kz-v3__titles { position: absolute; z-index: 2; left: 0; right: 0; top: 7.4%; display: flex; justify-content: space-between; gap: 32px; padding: 0 var(--pad); max-width: var(--max); margin: 0 auto; }
+.kz-v3__titles h2 { font-size: clamp(36px, 4.45vw, 64px); font-weight: 600; letter-spacing: -0.04em; line-height: 1; white-space: nowrap; }
+.kz-v3__col--right { text-align: right; }
+.kz-v3__lead, .kz-v3__more { margin-top: 23px; font-size: clamp(16px, 1.4vw, 20px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.25; opacity: var(--lo, 0); }
+.kz-v3__lead { max-width: 408px; }
+.kz-v3__more { color: rgba(255,255,255,.8); }
+.kz-v3__cut { z-index: 3; pointer-events: none; }
+.kz-v3__facts { position: absolute; z-index: 4; inset: 0; top: 16%; display: flex; justify-content: space-between; padding: 0 var(--pad); max-width: var(--max); margin: 0 auto; opacity: var(--fo, 0); transform: translateY(calc((1 - var(--fo, 0)) * 30px)); pointer-events: none; }
+.kz-v3__fact { width: 36.5%; }
+.kz-v3__fact + .kz-v3__fact { width: 31%; }
+.kz-v3__fact > b { display: block; font-size: clamp(48px, 6.1vw, 88px); font-weight: 600; letter-spacing: -0.05em; line-height: 1; }
+.kz-v3__fact > span { display: block; margin-top: 12px; max-width: 330px; font-size: clamp(15px, 1.4vw, 20px); font-weight: 600; line-height: 1.2; }
+.kz-v3__fact ul { list-style: none; margin-top: 28px; }
+.kz-v3__fact li { display: grid; grid-template-columns: 140px 1fr; gap: 16px; padding: 14px 0; border-top: 1px solid rgba(255,255,255,.28); font-size: clamp(15px, 1.4vw, 20px); line-height: 1.2; }
+.kz-v3__fact li strong { font-weight: 700; }
+.kz-v3__fact li span { font-weight: 600; }
+/* static layout: phones and reduced motion */
+.kz-v3.kz-static { height: auto; }
+.kz-static .kz-v3__stage { position: relative; height: auto; padding-top: 62vw; }
+.kz-static .kz-v3__bg, .kz-static .kz-v3__cut, .kz-static .kz-v3__shade { height: 62vw; bottom: auto; }
+.kz-static .kz-v3__titles { top: auto !important; bottom: auto; position: absolute; top: 4vw !important; opacity: 1 !important; }
+.kz-static .kz-v3__lead, .kz-static .kz-v3__more { display: none; }
+.kz-static .kz-v3__facts { position: relative; inset: auto; top: auto; opacity: 1; transform: none; padding: 40px var(--pad) 56px; gap: 40px; }
+@media (max-width: 760px) {
+  .kz-static .kz-v3__titles { flex-direction: column; gap: 4px; top: 6vw !important; }
+  .kz-static .kz-v3__titles h2 { font-size: 7vw; }
+  .kz-static .kz-v3__col--right { text-align: left; }
+  .kz-static .kz-v3__facts { flex-direction: column; }
+  .kz-v3__fact, .kz-v3__fact + .kz-v3__fact { width: 100%; }
+  .kz-v3__fact li { grid-template-columns: 110px 1fr; }
+}
+
+/* CTA: title glides from centre to the left, actions fade in */
+.cta-v3 { position: relative; height: 180vh; background: var(--blue); }
+.cta-v3__stage { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; overflow: hidden; color: #fff; }
+.cta-v3__inner { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 48px; padding: 0 72px; }
+.cta-v3__title { font-size: clamp(48px, 6.7vw, 96px); font-weight: 600; letter-spacing: -0.05em; line-height: .96; margin-bottom: 40px; will-change: transform; }
+.cta-v3__fade { opacity: var(--fo, 1); transform: translateY(calc((1 - var(--fo, 1)) * 16px)); }
+.cta-v3 .contacts small { color: #dbedff; }
+.cta-v3.cta-static { height: auto; }
+.cta-static .cta-v3__stage { position: relative; height: auto; padding: 96px 0; }
+@media (max-width: 960px) {
+  .cta-v3__inner { flex-direction: column; align-items: flex-start; padding: 0 var(--pad); }
+}
+
+/* footer on blue */
+.footer--blue { background: var(--blue); color: #fff; }
+.footer--blue .footer__links h4 { color: rgba(255,255,255,.65); }
+.footer--blue .footer__links a, .footer--blue .footer__links a:hover { color: #fff; }
+.footer--blue .footer__links a:hover { opacity: .75; }
+.footer--blue .footer__logo { color: #fff; }
+.footer--blue .footer__bottom { border-top-color: rgba(255,255,255,.3); color: rgba(255,255,255,.85); }
+
+@media (max-width: 960px) {
+  .tech-v3__stats { grid-template-columns: repeat(2, 1fr); }
+  .key-stats--v3 { margin-top: 8px; }
+}
+@media (max-width: 760px) {
+  .kz-static .kz-v3__titles { position: relative; top: auto !important; padding: 28px var(--pad) 0; }
+  .kz-static .kz-v3__titles h2 { font-size: 30px; white-space: normal; }
+  .kz-static .kz-v3__facts { padding-top: 28px; }
+  .tech-v3__stats b { font-size: 34px; white-space: nowrap; }
+  .tech-v3__stats span { font-size: 14px; }
+}

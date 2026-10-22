@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap&subset=cyrillic" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=15">
+  <link rel="stylesheet" href="assets/css/style.css?v=18">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -31,7 +31,7 @@
       <a href="index.html#about">О холдинге</a>
       <a href="index.html#tech">Galamat Tech</a>
       <a href="index.html#media">Galamat Media</a>
-      <a href="index.html#services">Услуги</a>
+      <a href="index.html#media-services">Услуги</a>
       <a href="team.html" class="is-active" aria-current="page">Команда</a>
       <a href="#careers">Карьера</a>
       <a href="#contacts">Контакты</a>
@@ -47,7 +47,7 @@
   <a href="index.html#about">О холдинге</a>
   <a href="index.html#tech">Galamat Tech</a>
   <a href="index.html#media">Galamat Media</a>
-  <a href="index.html#services">Услуги</a>
+  <a href="index.html#media-services">Услуги</a>
   <a href="team.html">Команда</a>
   <a href="#careers">Карьера</a>
   <a href="#contacts">Контакты</a>
@@ -111,19 +111,18 @@
     </div>
   </section>
 
-  <section class="cta" id="contacts">
-    <div class="wrap">
-      <div class="cta__box">
-        <div>
-          <h2>Давайте создадим<br>что-то вместе</h2>
-          <div class="cta__buttons">
-            <a class="btn btn--white" href="mailto:mirzassalim@quranyy.com">Написать нам <svg><use href="#i-out"/></svg></a>
+  <section class="cta-v3" id="contacts">
+    <div class="cta-v3__stage">
+      <div class="wrap cta-v3__inner">
+        <div class="cta-v3__left">
+          <h2 class="cta-v3__title">Давайте создадим<br>что-то вместе</h2>
+          <div class="cta__buttons cta-v3__fade">
+            <a class="btn btn--white" href="mailto:info@galamat.company">Написать нам <svg><use href="#i-out"/></svg></a>
             <a class="btn btn--ghost-white" href="tel:+77074675579">+7 707 467 55 79</a>
           </div>
         </div>
-        <div class="contacts">
-          <div><small>Проекты и реклама</small><a href="mailto:mirzassalim@quranyy.com?subject=%D0%9F%D0%B0%D1%80%D1%82%D0%BD%D1%91%D1%80%D1%81%D1%82%D0%B2%D0%BE%20%D1%81%20Galamat">Абылай Мирзасалим ↗</a></div>
-          <div><small>Пресса</small><a href="mailto:mirzassalim@quranyy.com?subject=%D0%9F%D1%80%D0%B5%D1%81%D1%81%D0%B0">Запрос для СМИ ↗</a></div>
+        <div class="contacts cta-v3__fade">
+          <div><small>Пресса</small><a href="mailto:info@galamat.company?subject=%D0%9F%D1%80%D0%B5%D1%81%D1%81%D0%B0">Запрос для СМИ ↗</a></div>
           <div><small>Карьера</small><a href="#careers">Вакансии ↗</a></div>
           <div><small>Офис</small><span>Алматы, Казахстан</span></div>
         </div>
@@ -132,15 +131,15 @@
   </section>
 </main>
 
-<footer class="footer">
+<footer class="footer footer--blue">
   <div class="wrap">
     <div class="footer__cols">
       <p class="footer__about">Технологический и медиа-холдинг<br>из Казахстана.</p>
       <div class="footer__links">
-        <div><h4>Холдинг</h4><ul><li><a href="index.html#about">О холдинге</a></li><li><a href="index.html#services">Услуги</a></li><li><a href="index.html#kazakhstan">Для Казахстана</a></li><li><a href="team.html">Команда</a></li><li><a href="team.html#careers">Карьера</a></li><li><a href="index.html#partners">Партнёры</a></li><li><a href="#contacts">Контакты</a></li></ul></div>
-        <div><h4>Galamat Tech</h4><ul><li><a href="index.html#tech-products">Продукты</a></li><li><a href="index.html#tech-dev">Разработка</a></li><li><a href="index.html#tech-clients">Клиентские проекты</a></li></ul></div>
-        <div><h4>Galamat Media</h4><ul><li><a class="link-blue" href="https://www.bee16.media" target="_blank" rel="noopener">bee16.media ↗</a></li><li><a href="index.html#media-services">Реклама и продакшн</a></li><li><a href="index.html#media-services">Cannect AI</a></li><li><a href="index.html#media-services">Baipket</a></li><li><a href="index.html#media-cases">Кейсы</a></li></ul></div>
-        <div><h4>Связь</h4><ul><li><a href="tel:+77074675579">+7 707 467 55 79</a></li><li><a href="mailto:mirzassalim@quranyy.com">Email</a></li></ul></div>
+        <div><h4>Холдинг</h4><ul><li><a href="index.html#about">О холдинге</a></li><li><a href="index.html#media-services">Услуги</a></li><li><a href="index.html#kazakhstan">Для Казахстана</a></li><li><a href="team.html">Команда</a></li><li><a href="team.html#careers">Карьера</a></li><li><a href="index.html#partners">Партнёры</a></li><li><a href="#contacts">Контакты</a></li></ul></div>
+        <div><h4>Galamat Tech</h4><ul><li><a href="index.html#tech-products">Продукты</a></li><li><a href="index.html#tech-dev">Разработка</a></li><li><a href="index.html#tech">Клиентские проекты</a></li></ul></div>
+        <div><h4>Galamat Media</h4><ul><li><a href="https://www.bee16.media" target="_blank" rel="noopener">bee16.media ↗</a></li><li><a href="index.html#media-services">Реклама и продакшн</a></li><li><a href="index.html#media-services">Cannect AI</a></li><li><a href="index.html#media-services">Baipket</a></li><li><a href="index.html#media-cases">Кейсы</a></li></ul></div>
+        <div><h4>Связь</h4><ul><li><a href="mailto:info@galamat.company">info@galamat.company</a></li><li><a href="tel:+77074675579">+7 707 467 55 79</a></li></ul></div>
       </div>
     </div>
     <div class="footer__logo"><svg viewBox="0 0 784 215" fill="currentColor" role="img" aria-label="Galamat"><use href="#g-logo"/></svg></div>
@@ -149,6 +148,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
-<script src="assets/js/main.js?v=15"></script>
+<script src="assets/js/main.js?v=18"></script>
 </body>
 </html>
