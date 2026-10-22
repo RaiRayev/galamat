@@ -802,3 +802,21 @@ html.lenis, html.lenis body { height: auto; }
 .network-v3 .accounts-head span { color: var(--grey); }
 .network-v3 .account { background: var(--white); color: var(--ink); }
 .network-v3 .account b { color: var(--ink); }
+
+/* ---------- Echo slogan, pure CSS (works in Safari/iOS too) ---------- */
+.echo-word { position: relative; }
+.echo-word .echo-base { color: transparent; }
+.echo-l {
+  position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none;
+  background-image: var(--g); -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  transform-origin: 50% 50%;
+  -webkit-transform: translateY(var(--dy)) scale(var(--s)); transform: translateY(var(--dy)) scale(var(--s));
+  opacity: var(--o);
+  filter: none;
+  animation: echo-in 1.5s cubic-bezier(.2, .75, .2, 1) backwards;
+  animation-delay: calc(var(--i) * 70ms);
+}
+/* only a "from" frame: each layer animates into its own resting transform/opacity */
+@keyframes echo-in { from { -webkit-transform: translateY(0) scale(1); transform: translateY(0) scale(1); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .echo-l { animation: none; } }
