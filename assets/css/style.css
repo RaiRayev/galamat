@@ -584,3 +584,30 @@ section[id] { scroll-margin-top: 72px; }
 /* Russian slogan: Cyrillic italic serif accent */
 .hero__title .accent { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 1.16em; letter-spacing: -0.025em; }
 .hero__title { margin-top: 0; }
+
+/* ---------- Hero slogan: "echo" word (from Figma, Slide 16:9 - 39) ---------- */
+.hero__title--echo {
+  font-size: clamp(38px, 7.2vw, 132px); font-weight: 700; letter-spacing: -0.08em; line-height: .83;
+  color: #2f2f2f; padding-bottom: .22em;
+}
+.echo-top, .echo-word { display: block; width: max-content; margin: 0 auto; }
+.echo-word { position: relative; }
+.echo-base { color: transparent; }
+.echo-l {
+  position: absolute; left: 0; top: 0; white-space: nowrap; pointer-events: none;
+  color: var(--c); transform: scale(var(--s)); transform-origin: 50% 56%;
+  filter: blur(.035em);
+  animation: echo-spread 1.5s cubic-bezier(.2, .75, .2, 1) both;
+  animation-delay: calc(var(--i) * 70ms);
+}
+/* the outermost solid copy and the outline stay crisp */
+.echo-l[style*="--i:6"] { filter: none; }
+.echo-l--outline { color: transparent; -webkit-text-stroke: .02em #0066ff; filter: none; }
+@keyframes echo-spread {
+  from { transform: scale(1); opacity: 0; }
+  to { transform: scale(var(--s)); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) { .echo-l { animation: none; } }
+.hero--ring .ring-stage { margin-top: 0; }
+.echo-l { filter: blur(.006em); }
+.echo-l[style*="--i:6"], .echo-l--outline { filter: none; }

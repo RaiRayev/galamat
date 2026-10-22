@@ -119,3 +119,19 @@
   window.addEventListener('resize', layout);
   requestAnimationFrame(frame);
 })();
+
+// Hero slogan: replay the echo when the pointer comes over it
+(function () {
+  var word = document.querySelector('.echo-word');
+  if (!word || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var busy = false;
+  word.addEventListener('pointerenter', function () {
+    if (busy) return;
+    busy = true;
+    var layers = word.querySelectorAll('.echo-l');
+    layers.forEach(function (l) { l.style.animation = 'none'; });
+    void word.offsetWidth; // restart the CSS animation
+    layers.forEach(function (l) { l.style.animation = ''; });
+    setTimeout(function () { busy = false; }, 1600);
+  });
+})();
