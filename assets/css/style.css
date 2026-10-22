@@ -626,3 +626,6 @@ section[id] { scroll-margin-top: 72px; }
 .echo-g--crisp { filter: none; }
 .echo-done .echo-g { animation: none; }
 @media (prefers-reduced-motion: reduce) { .echo-g { animation: none; } }
+
+/* Echo fills more transparent; the outline is stroke-only, so it is unaffected */
+.echo-svg .echo-g { fill-opacity: .55; }
