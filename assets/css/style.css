@@ -583,3 +583,4 @@ section[id] { scroll-margin-top: 72px; }
 
 /* Russian slogan: Cyrillic italic serif accent */
 .hero__title .accent { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 1.16em; letter-spacing: -0.025em; }
+.hero__title { margin-top: 0; }
