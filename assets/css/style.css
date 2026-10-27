@@ -832,3 +832,118 @@ html.lenis, html.lenis body { height: auto; }
   #tech-dev .chip { font-size: 17px; padding: 6px 12px; }
 }
 @media (max-width: 960px) { #tech-dev .inline-row { flex-direction: column; margin: 48px 0 0; padding: 20px; border-radius: 24px; } }
+
+/* ---------- Compact header (Figma 19:5) ---------- */
+section[id] { scroll-margin-top: 53px; }
+.site-header { background: rgba(255,255,255,.65); backdrop-filter: blur(11.4px); -webkit-backdrop-filter: blur(11.4px); }
+.site-header .wrap { max-width: none; height: 53px; }
+.site-header .logo svg { width: 109px; height: 30px; }
+.site-header .nav { gap: 36px; }
+.site-header .nav a { margin: 0 -9px; padding: 2px 9px; border-radius: 33px; color: var(--ink); font-size: 15px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.45; transition: background-color .25s, color .2s; }
+.site-header .nav a:hover { color: var(--blue); }
+.site-header .nav a.is-active { background: rgba(192,192,211,.29); color: var(--ink); font-weight: 600; }
+.site-header .lang { font-size: 14px; letter-spacing: -0.005em; }
+.btn--header { padding: 2px 12px; border: 0; border-radius: 999px; background: var(--blue); color: var(--white); font-size: 15px; font-weight: 500; letter-spacing: -0.005em; line-height: 1.45; }
+.btn--header:hover { background: #0066db; }
+.site-header .burger { width: 36px; height: 36px; }
+@media (max-width: 1120px) {
+  .mobile-menu { inset: 53px 0 auto 0; }
+  .mobile-menu .btn--header { padding: 10px 20px; }
+}
+@media (max-width: 600px) { .site-header .logo svg { width: 88px; height: 24px; } }
+
+/* ---------- bee16 map (from bee16-landing MapKz, Galamat colours) ---------- */
+.network-v3 .network--map { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: center; }
+.netmap { padding: 36px 28px 24px; border-radius: var(--radius-lg); background: var(--blue); color: var(--white); }
+.netmap__map { position: relative; width: 100%; aspect-ratio: 1000 / 545.9; isolation: isolate; }
+.netmap__map::before {
+  content: ""; position: absolute; z-index: 1; width: 34%; aspect-ratio: 1;
+  left: var(--spot-x, 61%); top: var(--spot-y, 29%); transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,255,255,.55), transparent 72%);
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s, left .5s cubic-bezier(.2,.75,.2,1), top .5s cubic-bezier(.2,.75,.2,1);
+}
+.netmap__map[data-has-selection]::before { opacity: 1; }
+.netmap__shape { position: relative; z-index: 0; display: block; width: 100%; height: 100%; overflow: visible; }
+.netmap__shape path {
+  fill: #fff; stroke: #b9d7ff; stroke-width: 1.2; stroke-linejoin: round; vector-effect: non-scaling-stroke; cursor: pointer;
+  transition: transform .25s cubic-bezier(.2,.75,.2,1), fill .25s, filter .25s;
+}
+.netmap__shape path:hover, .netmap__shape path:focus-visible, .netmap__shape path[data-active] {
+  transform: translateY(-5px); fill: #f2f8ff; stroke: var(--ink); stroke-width: 1.6;
+  filter: drop-shadow(0 9px 6px rgba(0,36,92,.35)); outline: none;
+}
+.netmap__shape path[data-active] { fill: var(--sky); }
+
+.netmap .pin { position: absolute; z-index: 1; width: 0; height: 0; }
+.netmap .pin:hover, .netmap .pin:focus-within, .netmap .pin[data-active] { z-index: 5; }
+.netmap .pin__hit {
+  position: absolute; left: 0; top: 0; display: flex; align-items: center; gap: 6px;
+  margin: -9px; padding: 9px; transform: translate(-5px, -50%);
+  border: 0; background: none; color: inherit; font: inherit; white-space: nowrap; cursor: pointer;
+}
+.netmap .pin--left .pin__hit { flex-direction: row-reverse; transform: translate(calc(-100% + 5px), -50%); }
+.netmap .pin--bottom .pin__hit { flex-direction: column; gap: 4px; transform: translate(-50%, -7px); }
+.netmap .pin__dot { position: relative; flex: none; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 0 2px #fff; }
+.netmap .pin--live .pin__dot { background: var(--blue); box-shadow: 0 0 0 2px #fff, 0 0 0 3.5px var(--blue); }
+.netmap .pin--major .pin__dot { width: 14px; height: 14px; }
+.netmap .pin--quiet .pin__dot { width: 8px; height: 8px; background: #8fa3bd; }
+.netmap .pin[data-active] .pin__dot::after {
+  content: ""; position: absolute; inset: -9px; border: 2px solid var(--blue); border-radius: 50%;
+  animation: netmap-pulse 1.7s ease-out infinite;
+}
+@keyframes netmap-pulse { from { transform: scale(.55); opacity: .7; } to { transform: scale(1.5); opacity: 0; } }
+.netmap .pin__label { padding: 2px 7px; border-radius: 6px; background: var(--ink); color: #fff; font-size: 11px; font-weight: 500; line-height: 1.4; }
+.netmap .pin--major .pin__label { padding: 3px 10px; border-radius: 8px; background: #fff; color: var(--blue); font-size: 15px; font-weight: 600; box-shadow: 0 4px 14px rgba(0,36,92,.18); }
+.netmap .pin__hit:hover .pin__label, .netmap .pin__hit:focus-visible .pin__label { background: var(--blue); color: #fff; }
+.netmap .pin--quiet .pin__label { opacity: 0; transform: translateX(-4px); transition: opacity .15s, transform .15s; }
+.netmap .pin--quiet:hover .pin__label { opacity: 1; transform: none; }
+.netmap .pin[data-active] .pin__label { opacity: 1; transform: none; background: var(--ink); color: #fff; }
+@media (prefers-reduced-motion: no-preference) {
+  .netmap .pin--live:not([data-active]) .pin__dot { animation: netmap-breathe 3.6s ease-in-out infinite; animation-delay: calc(var(--pin-index) * -280ms); }
+  @keyframes netmap-breathe { 50% { transform: scale(1.25); } }
+  .netmap__map[data-inview] .pin { animation: netmap-arrive .55s cubic-bezier(.2,.75,.2,1) both; animation-delay: calc(var(--pin-index) * 35ms); }
+  @keyframes netmap-arrive { from { opacity: 0; transform: translateY(8px) scale(.8); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .netmap__shape path { transition: none; }
+  .netmap .pin[data-active] .pin__dot::after { animation: none; opacity: .45; }
+}
+
+.netmap__detail {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px;
+  min-height: 60px; margin-top: 16px; padding: 10px 16px; border-radius: 18px;
+  background: rgba(255,255,255,.14); font-size: 14px;
+}
+.netmap__detail [hidden] { display: none; }
+.netmap__hint, .netmap__prompt { color: var(--sky); }
+.netmap__avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: var(--ink); }
+.netmap__city { font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+.netmap__account { font-weight: 600; }
+.netmap__account:hover, .netmap__action:hover { text-decoration: underline; text-underline-offset: 3px; }
+.netmap__action { margin-left: auto; font-weight: 600; white-space: nowrap; }
+
+@media (max-width: 1180px) { .network-v3 .network--map { grid-template-columns: 1fr; gap: 48px; } }
+@media (max-width: 1023px) {
+  .netmap .pin:not(.pin--mobile) .pin__label { display: none; }
+  .netmap .pin:not(.pin--mobile)[data-active] .pin__label { display: block; }
+  .netmap .pin:not(.pin--mobile) .pin__hit { transform: translate(-50%, -50%); }
+  .netmap .pin:not(.pin--mobile)[data-active] .pin__hit { transform: translate(-5px, -50%); }
+  .netmap .pin--m-left .pin__hit { flex-direction: row-reverse; gap: 6px; transform: translate(calc(-100% + 7px), -50%); }
+  .netmap .pin--m-right .pin__hit { flex-direction: row; gap: 6px; transform: translate(-7px, -50%); }
+  .netmap .pin--major .pin__label { padding: 2px 8px; font-size: 12px; }
+  .netmap .pin[data-city-pin="Шымкент"]:not([data-active]) .pin__label { display: none; }
+}
+@media (max-width: 600px) {
+  .netmap { padding: 24px 12px 12px; border-radius: var(--radius-md); }
+  .netmap__detail { flex-direction: column; align-items: flex-start; }
+  .netmap__action { margin-left: 0; }
+}
+@media (max-width: 600px) {
+  .netmap .pin__dot { width: 7px; height: 7px; box-shadow: 0 0 0 1.5px #fff; }
+  .netmap .pin--live .pin__dot { box-shadow: 0 0 0 1.5px #fff, 0 0 0 2.5px var(--blue); }
+  .netmap .pin--major .pin__dot { width: 10px; height: 10px; }
+  .netmap .pin--quiet .pin__dot { width: 6px; height: 6px; }
+  .netmap .pin--major .pin__label { padding: 1px 6px; font-size: 11px; border-radius: 6px; }
+  .netmap .pin__label { font-size: 10px; padding: 1px 5px; }
+}

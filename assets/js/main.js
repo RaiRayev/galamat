@@ -137,7 +137,7 @@
     var target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
     if (!target) return;
     e.preventDefault();
-    lenis.scrollTo(target, { offset: -72, duration: 1.4 });
+    lenis.scrollTo(target, { offset: -53, duration: 1.4 });
     history.pushState(null, '', url.hash);
   });
   window.galamatLenis = lenis;
@@ -245,4 +245,94 @@
   window.addEventListener('scroll', req, { passive: true });
   window.addEventListener('resize', req);
   run();
+})();
+
+// ---------- Header: highlight the section on screen ----------
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.site-header .nav a[href^="#"]'));
+  var items = links.map(function (a) { return { a: a, el: document.getElementById(a.getAttribute('href').slice(1)) }; })
+    .filter(function (it) { return it.el; });
+  if (!items.length) return;
+  var ticking = false;
+  function update() {
+    ticking = false;
+    var line = window.innerHeight * 0.35, current = null;
+    items.forEach(function (it) { if (it.el.getBoundingClientRect().top <= line) current = it; });
+    // the last links (partners, contacts) win once the page bottom is reached
+    if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) current = items[items.length - 1];
+    items.forEach(function (it) { it.a.classList.toggle('is-active', it === current); });
+  }
+  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+
+// ---------- bee16 map: pick a city or a region ----------
+(function () {
+  var map = document.querySelector('[data-netmap] [data-map]');
+  if (!map) return;
+  var root = map.parentNode;
+  var pins = [].slice.call(map.querySelectorAll('[data-city-pin]'));
+  var regions = [].slice.call(map.querySelectorAll('[data-region-id]'));
+  var hint = root.querySelector('[data-map-hint]'), city = root.querySelector('[data-map-city]');
+  var account = root.querySelector('[data-map-account]'), avatar = root.querySelector('[data-map-avatar]');
+  var prompt = root.querySelector('[data-map-prompt]'), action = root.querySelector('[data-map-action]');
+  // SVG paints later paths on top: move the touched region last so its lift and shadow show
+  function raise(region) {
+    var parent = region.parentNode;
+    if (parent.lastChild === region) return;
+    var focused = document.activeElement === region;
+    parent.appendChild(region);
+    if (focused) region.focus({ preventScroll: true });
+  }
+  function select(name, display) {
+    var pin = pins.filter(function (p) { return p.dataset.cityPin === name; })[0];
+    var btn = pin && pin.querySelector('[data-city-select]');
+    if (!btn) return;
+    var d = btn.dataset;
+    regions.forEach(function (r) {
+      var on = r.dataset.regionId === d.regionRef;
+      r.toggleAttribute('data-active', on);
+      r.setAttribute('aria-pressed', String(on));
+      if (on) raise(r);
+    });
+    pins.forEach(function (p) {
+      p.toggleAttribute('data-active', p === pin);
+      p.querySelector('button').setAttribute('aria-pressed', String(p === pin));
+    });
+    map.style.setProperty('--spot-x', d.cityX * 100 + '%');
+    map.style.setProperty('--spot-y', d.cityY * 100 + '%');
+    map.setAttribute('data-has-selection', '');
+    hint.hidden = true;
+    city.hidden = false;
+    city.textContent = display || name;
+    account.hidden = !d.cityAccount;
+    avatar.hidden = !d.cityAccount;
+    prompt.hidden = !!d.cityAccount;
+    if (d.cityAccount) {
+      account.textContent = '@' + d.cityAccount + ' · ' + d.citySubs;
+      account.href = 'https://www.instagram.com/' + d.cityAccount + '/';
+      avatar.src = d.cityAvatar;
+    }
+    action.hidden = false;
+  }
+  pins.forEach(function (p) {
+    var btn = p.querySelector('[data-city-select]');
+    btn.addEventListener('click', function () { select(btn.dataset.citySelect); });
+  });
+  regions.forEach(function (r) {
+    var activate = function () { select(r.dataset.regionCity, r.dataset.regionName); };
+    r.addEventListener('pointerenter', function () { raise(r); });
+    r.addEventListener('focus', function () { raise(r); });
+    r.addEventListener('click', activate);
+    r.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+    });
+  });
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { map.setAttribute('data-inview', ''); io.disconnect(); }
+    }, { threshold: 0.3 });
+    io.observe(map);
+  }
 })();
