@@ -51,7 +51,8 @@
   var cards = Array.prototype.slice.call(ring.children);
   var n = cards.length, step = 360 / n;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var angle = 0, vel = 0, speed = reduce ? 0 : 5; // degrees per second
+  // a growing angle moves the visible cards left, so every input is negated: cards follow the finger, drift right and scroll pushes them right
+  var angle = 0, vel = 0, speed = reduce ? 0 : -5; // degrees per second
   var dragging = false, lastX = 0, moved = 0, running = true, last = 0, lastScroll = window.scrollY;
 
   function layout() {
@@ -91,7 +92,7 @@
   window.addEventListener('pointermove', function (e) {
     if (!dragging) return;
     var dx = e.clientX - lastX; lastX = e.clientX; moved += Math.abs(dx);
-    angle += dx * 0.18; vel = dx * 0.18;
+    angle -= dx * 0.18; vel = -dx * 0.18;
   });
   window.addEventListener('pointerup', function () {
     if (!dragging) return;
@@ -105,7 +106,7 @@
 
   window.addEventListener('scroll', function () {
     var d = window.scrollY - lastScroll; lastScroll = window.scrollY;
-    if (!reduce) vel = Math.max(-3, Math.min(3, vel + d * 0.012));
+    if (!reduce) vel = Math.max(-3, Math.min(3, vel - d * 0.012));
   }, { passive: true });
 
   if ('IntersectionObserver' in window) {
